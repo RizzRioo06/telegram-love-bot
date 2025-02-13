@@ -78,10 +78,6 @@ So today, on **Valentine’s Day**, I just want to remind you of this—**I love
 💘 *Elian Rin*`
 };
 
-// Function to show love letter on the website
-function showLetter(letterKey) {
-    document.getElementById("letter-content").innerText = letters[letterKey];
-}
 
 
 // Message Board
@@ -99,18 +95,24 @@ function addMessage() {
 
 function sendLetterToTelegram(letterKey) {
     let message = letters[letterKey];
+    console.log("Message to send:", message);
 
-    fetch("https://your-server.onrender.com/send-message", {
+    fetch("https://telegram-love-bot.onrender.com/send-message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message })
     })
         .then(response => response.json())
         .then(data => {
+            console.log("Response from server:", data);
             if (data.success) {
                 alert("Love letter sent successfully! 💖");
             } else {
                 alert("Oops! Could not send the message.");
             }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred while sending the message.");
         });
 }
