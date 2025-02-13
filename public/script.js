@@ -116,3 +116,32 @@ function sendLetterToTelegram(letterKey) {
             alert("An error occurred while sending the message.");
         });
 }
+
+
+document.getElementById("love-button").addEventListener("click", () => {
+    for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+            const balloon = document.createElement("div");
+            balloon.innerHTML = "🎈"; // Balloon emoji
+            balloon.classList.add("balloon");
+            document.body.appendChild(balloon);
+
+            balloon.style.left = Math.random() * 100 + "vw";
+            balloon.style.bottom = "-10vh"; // Start below screen
+            balloon.style.fontSize = Math.random() * 20 + 10 + "px";
+
+            // Balloon floating animation
+            balloon.animate([
+                { transform: `translateY(0vh)`, opacity: 1 },
+                { transform: `translateY(-120vh)`, opacity: 0 }
+            ], {
+                duration: 4000 + Math.random() * 2000,
+                easing: "ease-in-out",
+                fill: "forwards"
+            });
+
+            setTimeout(() => { balloon.remove(); }, 5000);
+        }, i * 100);
+    }
+});
+
